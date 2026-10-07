@@ -1,0 +1,49 @@
+diff --git a/Config.in b/Config.in
+index aef8a0e2f6..f639501d7d 100644
+--- a/Config.in
++++ b/Config.in
+@@ -127,6 +127,17 @@ menu "Recalbox"
+          source "$BR2_EXTERNAL_RECALBOX_PATH/package/sfml/Config.in"
+          source "$BR2_EXTERNAL_RECALBOX_PATH/package/tft-waveshare/Config.in"
+          source "$BR2_EXTERNAL_RECALBOX_PATH/package/recalbox-hardware/Config.in"
++         source "$BR2_EXTERNAL_RECALBOX_PATH/package/python-argcomplete/Config.in"
++         source "$BR2_EXTERNAL_RECALBOX_PATH/package/python-sf-rpi-status/Config.in"
++         source "$BR2_EXTERNAL_RECALBOX_PATH/package/python-pm-auto/Config.in"
++         source "$BR2_EXTERNAL_RECALBOX_PATH/package/python-adafruit-platformdetect/Config.in"
++         source "$BR2_EXTERNAL_RECALBOX_PATH/package/python-adafruit-pureio/Config.in"
++         source "$BR2_EXTERNAL_RECALBOX_PATH/package/python-sysv-ipc/Config.in"
++         source "$BR2_EXTERNAL_RECALBOX_PATH/package/python-adafruit-blinka/Config.in"
++         source "$BR2_EXTERNAL_RECALBOX_PATH/package/python-adafruit-circuitpython-pixelbuf/Config.in"
++         source "$BR2_EXTERNAL_RECALBOX_PATH/package/python-adafruit-circuitpython-busdevice/Config.in"         
++         source "$BR2_EXTERNAL_RECALBOX_PATH/package/python-adafruit-circuitpython-neopixel-spi/Config.in"
++         source "$BR2_EXTERNAL_RECALBOX_PATH/package/recalbox-pironman5/Config.in"
+          source "$BR2_EXTERNAL_RECALBOX_PATH/package/recalbox-settings/Config.in"
+          source "$BR2_EXTERNAL_RECALBOX_PATH/package/wxwidgets/Config.in"
+ menu "Emulationstation"
+diff --git a/configs/recalbox-rpi5_64_defconfig b/configs/recalbox-rpi5_64_defconfig
+index 572a43de60..01e33be713 100644
+--- a/configs/recalbox-rpi5_64_defconfig
++++ b/configs/recalbox-rpi5_64_defconfig
+@@ -34,11 +34,13 @@ BR2_LINUX_KERNEL_CUSTOM_TARBALL=y
+ BR2_LINUX_KERNEL_CUSTOM_TARBALL_LOCATION="$(call github,raspberrypi,linux,3dd2c2c507c271d411fab2e82a2b3b7e0b6d3f16)/linux-3dd2c2c507c271d411fab2e82a2b3b7e0b6d3f16.tar.gz"
+ BR2_LINUX_KERNEL_PATCH="$(BR2_EXTERNAL_RECALBOX_PATH)/board/recalbox/kernel_patches $(BR2_EXTERNAL_RECALBOX_PATH)/board/recalbox/kernel_patches/6.12 $(BR2_EXTERNAL_RECALBOX_PATH)/board/recalbox/rpi/kernel_patches/6.12"
+ BR2_LINUX_KERNEL_DEFCONFIG="bcm2712"
+-BR2_LINUX_KERNEL_CONFIG_FRAGMENT_FILES="$(BR2_EXTERNAL_RECALBOX_PATH)/board/recalbox/rpi/kernel-6.12-defconfig-fragment.config"
++BR2_LINUX_KERNEL_CONFIG_FRAGMENT_FILES="$(BR2_EXTERNAL_RECALBOX_PATH)/board/recalbox/rpi/kernel-6.12-defconfig-fragment.config $(BR2_EXTERNAL_RECALBOX_PATH)/board/recalbox/pironman5-kernel.config"
+ BR2_LINUX_KERNEL_DTS_SUPPORT=y
+ BR2_LINUX_KERNEL_INTREE_DTS_NAME="broadcom/bcm2712-rpi-5-b broadcom/bcm2712d0-rpi-5-b broadcom/bcm2712-rpi-500 broadcom/bcm2712-rpi-cm5-cm4io broadcom/bcm2712-rpi-cm5-cm5io broadcom/bcm2712-rpi-cm5l-cm4io broadcom/bcm2712-rpi-cm5l-cm5io"
+ BR2_LINUX_KERNEL_DTB_OVERLAY_SUPPORT=y
+ BR2_LINUX_KERNEL_DTS_INSTALL_OVERLAYS=y
++BR2_PACKAGE_UTIL_LINUX=y
++BR2_PACKAGE_UTIL_LINUX_BINARIES=y
+ BR2_PACKAGE_BUSYBOX_CONFIG_FRAGMENT_FILES="$(BR2_EXTERNAL_RECALBOX_PATH)/board/recalbox/busybox.custom.config"
+ BR2_PACKAGE_ALSA_UTILS=y
+ BR2_PACKAGE_ALSA_UTILS_AMIXER=y
+@@ -110,6 +112,7 @@ BR2_PACKAGE_NTFS_3G_NTFSPROGS=y
+ BR2_PACKAGE_FBDUMP=y
+ BR2_PACKAGE_FBGRAB=y
+ BR2_PACKAGE_RECALBOX-FBV=y
++BR2_PACKAGE_RECALBOX_PIRONMAN5=y
+ BR2_PACKAGE_SDL_IMAGE_XPM=y
+ BR2_PACKAGE_SDL_MIXER=y
+ BR2_PACKAGE_SDL_NET=y

@@ -1,0 +1,14 @@
+config BR2_PACKAGE_PYTHON_PM_AUTO
+	bool "python-pm-auto"
+	select BR2_PACKAGE_PYTHON_SF_RPI_STATUS
+	select BR2_PACKAGE_PYTHON_EVDEV
+	select BR2_PACKAGE_PYTHON_PILLOW
+	select BR2_PACKAGE_PYTHON_SMBUS2
+	select BR2_PACKAGE_PYTHON_NUMPY
+	select BR2_PACKAGE_PYTHON_RPI_LGPIO
+	select BR2_PACKAGE_PYTHON_ADAFRUIT_BLINKA
+        select BR2_PACKAGE_PYTHON_ADAFRUIT_CIRCUITPYTHON_NEOPIXEL_SPI
+	help
+	  SunFounder Pironman automatic hardware-control library.
+
+	  https://github.com/sunfounder/pm_auto

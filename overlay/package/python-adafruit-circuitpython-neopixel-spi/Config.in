@@ -1,0 +1,9 @@
+config BR2_PACKAGE_PYTHON_ADAFRUIT_CIRCUITPYTHON_NEOPIXEL_SPI
+	bool "python-adafruit-circuitpython-neopixel-spi"
+	select BR2_PACKAGE_PYTHON_ADAFRUIT_BLINKA
+        select BR2_PACKAGE_PYTHON_ADAFRUIT_CIRCUITPYTHON_PIXELBUF
+        select BR2_PACKAGE_PYTHON_ADAFRUIT_CIRCUITPYTHON_BUSDEVICE
+	help
+	  Adafruit CircuitPython NeoPixel SPI driver.
+
+	  https://github.com/adafruit/Adafruit_CircuitPython_NeoPixel_SPI

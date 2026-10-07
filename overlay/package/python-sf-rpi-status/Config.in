@@ -1,0 +1,9 @@
+config BR2_PACKAGE_PYTHON_SF_RPI_STATUS
+	bool "python-sf-rpi-status"
+	select BR2_PACKAGE_PYTHON_REQUESTS
+	select BR2_PACKAGE_PYTHON_PSUTIL
+	select BR2_PACKAGE_PYTHON_PYUDEV
+	help
+	  SunFounder Raspberry Pi status monitoring library.
+
+	  https://github.com/sunfounder/sf_rpi_status

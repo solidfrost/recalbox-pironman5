@@ -1,0 +1,11 @@
+config BR2_PACKAGE_RECALBOX_PIRONMAN5
+	bool "recalbox-pironman5"
+	depends on BR2_aarch64
+	select BR2_PACKAGE_PYTHON3
+	select BR2_PACKAGE_PYTHON_ARGCOMPLETE
+        select BR2_PACKAGE_PYTHON_SF_RPI_STATUS
+        select BR2_PACKAGE_PYTHON_PM_AUTO
+        select BR2_PACKAGE_I2C_TOOLS
+	select BR2_PACKAGE_LIRC_TOOLS
+	help
+	  SunFounder Pironman 5 support for Raspberry Pi 5.

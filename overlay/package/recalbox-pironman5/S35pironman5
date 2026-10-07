@@ -1,0 +1,109 @@
+cat > /etc/init.d/S35pironman5 <<'EOF'
+#!/bin/sh
+
+DAEMON="/usr/bin/pironman5"
+CONFIG="/recalbox/share/system/configs/pironman5/config.json"
+CONFIG_DIR="/recalbox/share/system/configs/pironman5"
+PIDFILE="/var/run/pironman5.pid"
+LOG_DIR="/var/log/pironman5"
+
+case "$1" in
+	start)
+		echo "Starting Pironman 5"
+
+		if [ -f "$PIDFILE" ]; then
+			PID="$(cat "$PIDFILE" 2>/dev/null)"
+			if [ -n "$PID" ] && [ -d "/proc/$PID" ]; then
+				echo "Pironman 5 is already running (PID $PID)"
+				exit 0
+			fi
+			rm -f "$PIDFILE"
+		fi
+
+		i=0
+		while [ ! -d /recalbox/share/system ] && [ "$i" -lt 30 ]; do
+			sleep 1
+			i=$((i + 1))
+		done
+
+		mkdir -p "$CONFIG_DIR"
+		mkdir -p "$LOG_DIR"
+
+		cd /tmp || exit 1
+
+		modprobe i2c-dev 2>/dev/null || true
+		modprobe gpio-ir-recv 2>/dev/null || true
+
+		i=0
+		while [ ! -e /dev/i2c-1 ] && [ "$i" -lt 10 ]; do
+			sleep 1
+			i=$((i + 1))
+		done
+
+		/usr/bin/pironman5-config >/dev/null 2>&1 || true
+
+		if [ ! -x "$DAEMON" ]; then
+			echo "Pironman 5 executable not found: $DAEMON"
+			exit 1
+		fi
+
+		start-stop-daemon -S -b -m \
+			-p "$PIDFILE" \
+			-x "$DAEMON" -- \
+			-cp "$CONFIG" start
+
+		exit $?
+		;;
+
+	stop)
+		echo "Stopping Pironman 5"
+
+		if [ -f "$PIDFILE" ]; then
+			PID="$(cat "$PIDFILE" 2>/dev/null)"
+
+			if [ -n "$PID" ] && [ -d "/proc/$PID" ]; then
+				kill "$PID" 2>/dev/null || true
+
+				i=0
+				while [ -d "/proc/$PID" ] && [ "$i" -lt 10 ]; do
+					sleep 1
+					i=$((i + 1))
+				done
+
+				if [ -d "/proc/$PID" ]; then
+					kill -9 "$PID" 2>/dev/null || true
+				fi
+			fi
+
+			rm -f "$PIDFILE"
+		fi
+
+		exit 0
+		;;
+
+	restart)
+		"$0" stop
+		sleep 1
+		"$0" start
+		;;
+
+	status)
+		if [ -f "$PIDFILE" ]; then
+			PID="$(cat "$PIDFILE" 2>/dev/null)"
+
+			if [ -n "$PID" ] && [ -d "/proc/$PID" ]; then
+				echo "Pironman 5 is running (PID $PID)"
+				exit 0
+			fi
+		fi
+
+		echo "Pironman 5 is not running"
+		exit 1
+		;;
+
+	*)
+		echo "Usage: $0 {start|stop|restart|status}"
+		exit 1
+		;;
+esac
+EOF

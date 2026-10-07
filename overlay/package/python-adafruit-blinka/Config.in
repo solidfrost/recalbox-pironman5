@@ -1,0 +1,12 @@
+config BR2_PACKAGE_PYTHON_ADAFRUIT_BLINKA
+	bool "python-adafruit-blinka"
+	select BR2_PACKAGE_PYTHON_ADAFRUIT_PLATFORMDETECT
+	select BR2_PACKAGE_PYTHON_ADAFRUIT_PUREIO
+	select BR2_PACKAGE_PYTHON_SYSV_IPC
+	select BR2_PACKAGE_PYTHON_LGPIO
+	select BR2_PACKAGE_PYTHON_RPI_LGPIO
+	select BR2_PACKAGE_PYTHON_SPIDEV
+	help
+	  Adafruit Blinka CircuitPython compatibility layer.
+
+	  https://github.com/adafruit/Adafruit_Blinka

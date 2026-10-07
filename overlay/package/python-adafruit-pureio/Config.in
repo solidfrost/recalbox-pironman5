@@ -1,0 +1,6 @@
+config BR2_PACKAGE_PYTHON_ADAFRUIT_PUREIO
+	bool "python-adafruit-pureio"
+	help
+	  Adafruit PureIO library.
+
+	  https://github.com/adafruit/Adafruit_Python_PureIO

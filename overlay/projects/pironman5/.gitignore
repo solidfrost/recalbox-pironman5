@@ -1,0 +1,6 @@
+.vscode
+pironman5.egg-info*
+*__pycache__*
+dev
+.claude
+CLAUDE.md

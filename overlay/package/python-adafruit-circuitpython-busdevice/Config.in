@@ -1,0 +1,7 @@
+config BR2_PACKAGE_PYTHON_ADAFRUIT_CIRCUITPYTHON_BUSDEVICE
+	bool "python-adafruit-circuitpython-busdevice"
+	select BR2_PACKAGE_PYTHON_ADAFRUIT_BLINKA
+	help
+	  Adafruit CircuitPython BusDevice helpers.
+
+	  https://github.com/adafruit/Adafruit_CircuitPython_BusDevice

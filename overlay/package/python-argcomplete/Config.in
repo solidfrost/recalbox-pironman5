@@ -1,0 +1,7 @@
+config BR2_PACKAGE_PYTHON_ARGCOMPLETE
+	bool "python-argcomplete"
+	help
+	  Argcomplete provides easy, extensible command-line tab
+	  completion for Python applications using argparse.
+
+	  https://github.com/kislyuk/argcomplete
